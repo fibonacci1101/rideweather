@@ -1,0 +1,23 @@
+{
+  "name": "Ride Weather App",
+  "short_name": "RideWeather",
+  "description": "Ride with GPSのルート上の各地点の天気予報をまとめて確認できるアプリ",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#143525",
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}

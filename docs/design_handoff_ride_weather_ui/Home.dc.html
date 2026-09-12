@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  body { margin: 0; background: oklch(97% 0.004 160); }
+  a { color: oklch(45% 0.13 160); }
+  a:hover { color: oklch(38% 0.13 160); }
+  @media (max-width: 640px) {
+    .rw-form-grid { grid-template-columns: 1fr !important; }
+    .rw-title { font-size: 24px !important; }
+    .rw-map { aspect-ratio: 4/3 !important; }
+  }
+</style>
+</helmet>
+
+<div style="font-family: 'Manrope', 'Noto Sans JP', sans-serif; max-width: 1080px; margin: 0 auto; padding: 40px 24px 80px; color: oklch(18% 0.006 160);">
+
+  <!-- Header -->
+  <div style="margin-bottom: 28px;">
+    <div style="font-size: 13px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; color: oklch(45% 0.13 160);">Ride Weather App</div>
+    <div class="rw-title" style="font-size: 30px; font-weight: 800; margin-top: 4px;">ルート天気予報</div>
+    <div style="font-size: 14px; color: oklch(48% 0.02 160); margin-top: 6px;">Ride with GPS のルートを指定し、走行日時に応じた各地点の天気を確認できます。</div>
+  </div>
+
+  <!-- Input form -->
+  <div style="background: white; border-radius: 20px; padding: 28px; box-shadow: 0 1px 3px oklch(0% 0 0 / 0.06);">
+    <div class="rw-form-grid" style="display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 16px; align-items: end;">
+      <div>
+        <label style="display: block; font-size: 12px; font-weight: 700; color: oklch(45% 0.02 160); margin-bottom: 6px;">Ride with GPS ルートID または URL</label>
+        <input type="text" value="12345678" style="width: 100%; box-sizing: border-box; padding: 11px 14px; border-radius: 10px; border: 1px solid oklch(88% 0.01 160); font-size: 14px; font-family: inherit; color: inherit;" />
+      </div>
+      <div>
+        <label style="display: block; font-size: 12px; font-weight: 700; color: oklch(45% 0.02 160); margin-bottom: 6px;">走行日</label>
+        <input type="text" value="2026-08-15" style="width: 100%; box-sizing: border-box; padding: 11px 14px; border-radius: 10px; border: 1px solid oklch(88% 0.01 160); font-size: 14px; font-family: inherit; color: inherit;" />
+      </div>
+      <div>
+        <label style="display: block; font-size: 12px; font-weight: 700; color: oklch(45% 0.02 160); margin-bottom: 6px;">走行時間</label>
+        <input type="text" value="09:00" style="width: 100%; box-sizing: border-box; padding: 11px 14px; border-radius: 10px; border: 1px solid oklch(88% 0.01 160); font-size: 14px; font-family: inherit; color: inherit;" />
+      </div>
+      <div>
+        <label style="display: block; font-size: 12px; font-weight: 700; color: oklch(45% 0.02 160); margin-bottom: 6px;">平均時速 (km/h)</label>
+        <input type="text" value="22" style="width: 100%; box-sizing: border-box; padding: 11px 14px; border-radius: 10px; border: 1px solid oklch(88% 0.01 160); font-size: 14px; font-family: inherit; color: inherit;" />
+      </div>
+    </div>
+    <div style="margin-top: 18px; display: flex; justify-content: flex-end;">
+      <button style="background: oklch(30% 0.05 160); color: white; border: none; border-radius: 10px; padding: 12px 24px; font-size: 14px; font-weight: 700; font-family: inherit; cursor: pointer;">天気予報を表示</button>
+    </div>
+  </div>
+
+  <!-- Route map -->
+  <div class="rw-map" style="margin-top: 24px; border-radius: 20px; overflow: hidden; background: repeating-linear-gradient(135deg, oklch(93% 0.008 160) 0px, oklch(93% 0.008 160) 12px, oklch(96% 0.006 160) 12px, oklch(96% 0.006 160) 24px); aspect-ratio: 16/6; display: flex; align-items: center; justify-content: center;">
+    <div style="font-family: 'Courier New', monospace; font-size: 13px; color: oklch(45% 0.02 160); background: white; padding: 8px 16px; border-radius: 8px;">Ride with GPS route map (iframe embed)</div>
+  </div>
+
+  <!-- Summary -->
+  <div style="margin-top: 24px; background: oklch(93% 0.05 60); border-radius: 14px; padding: 14px 18px; display: flex; align-items: center; gap: 10px;">
+    <div style="width: 8px; height: 8px; border-radius: 50%; background: oklch(58% 0.15 40); flex-shrink: 0;"></div>
+    <div style="font-size: 13px; color: oklch(30% 0.05 40);"><strong>CP4〜到着地点</strong>で降水確率60%以上・風速4m/s超。休憩や装備の見直しを検討してください。</div>
+  </div>
+
+  <!-- Export + section title -->
+  <div style="display: flex; align-items: baseline; justify-content: space-between; margin-top: 24px; margin-bottom: 16px;">
+    <div style="font-size: 20px; font-weight: 800;">天気予報</div>
+    <button style="background: white; color: oklch(30% 0.05 160); border: 1px solid oklch(85% 0.02 160); border-radius: 10px; padding: 9px 18px; font-size: 13px; font-weight: 700; font-family: inherit; cursor: pointer;">画像として保存</button>
+  </div>
+
+  <!-- Weather cards -->
+  <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 14px;">
+    <sc-for list="{{ points }}" as="p" hint-placeholder-count="6">
+      <div style="background: white; border-radius: 16px; padding: 18px; box-shadow: 0 1px 3px oklch(0% 0 0 / 0.06); border: 1.5px solid {{ p.borderColor }}; display: flex; flex-direction: column; gap: 10px;">
+        <div>
+          <div style="font-size: 15px; font-weight: 700;">{{ p.name }}</div>
+          <div style="font-size: 12px; color: oklch(50% 0.02 160); margin-top: 2px;">距離: {{ p.distance }} km ・ 到着予定: {{ p.eta }}</div>
+        </div>
+
+        <div style="display: flex; align-items: center; gap: 12px; padding: 10px 0; border-top: 1px solid oklch(94% 0.006 160); border-bottom: 1px solid oklch(94% 0.006 160);">
+          <div style="width: 40px; height: 40px; border-radius: 50%; background: {{ p.iconBg }}; position: relative; flex-shrink: 0;">
+            <div style="position: absolute; inset: 8px; border-radius: 50%; background: {{ p.iconFg }};"></div>
+          </div>
+          <div>
+            <div style="font-size: 22px; font-weight: 800; line-height: 1;">{{ p.temp }}°C</div>
+            <div style="font-size: 12px; color: oklch(50% 0.02 160);">{{ p.desc }} ・ 体感 {{ p.feelsLike }}°C</div>
+          </div>
+        </div>
+
+        <div style="font-size: 13px; color: oklch(30% 0.01 160); display: flex; flex-direction: column; gap: 4px;">
+          <div style="display: flex; justify-content: space-between;"><span style="color: oklch(50% 0.02 160);">降水確率</span><span style="font-weight: 700; color: {{ p.popColor }};">{{ p.pop }}%</span></div>
+          <div style="display: flex; justify-content: space-between;"><span style="color: oklch(50% 0.02 160);">風速・風向き</span><span style="font-weight: 700; color: {{ p.windColor }};">{{ p.wind }}</span></div>
+          <div style="display: flex; justify-content: space-between;"><span style="color: oklch(50% 0.02 160);">降水量 (3h)</span><span style="font-weight: 600;">{{ p.rain }}</span></div>
+        </div>
+
+        <div style="font-size: 12px; color: oklch(55% 0.02 160); padding-top: 6px; margin-top: auto;">日の出 {{ p.sunrise }} ・ 日の入り {{ p.sunset }}</div>
+      </div>
+    </sc-for>
+  </div>
+
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  renderVals() {
+    const sun = 'oklch(78% 0.14 70)';
+    const cloud = 'oklch(80% 0.02 160)';
+    const rain = 'oklch(65% 0.03 220)';
+    const raw = [
+      { name: '出発地点', distance: '0.0', eta: '09:00', temp: 24, feelsLike: 25, desc: '晴れ', iconBg: 'oklch(90% 0.03 70)', iconFg: sun, pop: 5, windSpeed: 2.1, wind: '2.1 m/s 北西', rain: '0.0 mm', sunrise: '05:12', sunset: '18:44' },
+      { name: 'CP1', distance: '18.4', eta: '09:50', temp: 25, feelsLike: 26, desc: '晴れ', iconBg: 'oklch(90% 0.03 70)', iconFg: sun, pop: 8, windSpeed: 2.6, wind: '2.6 m/s 北西', rain: '0.0 mm', sunrise: '05:12', sunset: '18:44' },
+      { name: 'CP2', distance: '37.1', eta: '10:41', temp: 26, feelsLike: 28, desc: '薄曇り', iconBg: 'oklch(93% 0.01 160)', iconFg: cloud, pop: 15, windSpeed: 3.0, wind: '3.0 m/s 西', rain: '0.0 mm', sunrise: '05:12', sunset: '18:44' },
+      { name: 'CP3', distance: '55.9', eta: '11:32', temp: 26, feelsLike: 28, desc: '曇り', iconBg: 'oklch(93% 0.01 160)', iconFg: cloud, pop: 30, windSpeed: 3.4, wind: '3.4 m/s 西', rain: '0.0 mm', sunrise: '05:12', sunset: '18:44' },
+      { name: 'CP4', distance: '74.2', eta: '12:23', temp: 24, feelsLike: 25, desc: '小雨', iconBg: 'oklch(90% 0.02 220)', iconFg: rain, pop: 60, windSpeed: 4.1, wind: '4.1 m/s 南西', rain: '0.8 mm', sunrise: '05:12', sunset: '18:44' },
+      { name: '到着地点', distance: '92.0', eta: '13:15', temp: 23, feelsLike: 24, desc: '小雨', iconBg: 'oklch(90% 0.02 220)', iconFg: rain, pop: 65, windSpeed: 4.4, wind: '4.4 m/s 南西', rain: '1.2 mm', sunrise: '05:12', sunset: '18:44' }
+    ];
+    const warnColor = 'oklch(55% 0.16 40)';
+    const normalColor = 'oklch(20% 0.01 160)';
+    const points = raw.map(p => {
+      const popWarn = p.pop >= 50;
+      const windWarn = p.windSpeed >= 4;
+      return {
+        ...p,
+        popColor: popWarn ? warnColor : normalColor,
+        windColor: windWarn ? warnColor : normalColor,
+        borderColor: (popWarn || windWarn) ? 'oklch(75% 0.1 40)' : 'oklch(94% 0.006 160)',
+      };
+    });
+    return { points };
+  }
+}
+</script>
+</body>
+</html>

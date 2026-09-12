@@ -1,0 +1,27 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "ride-weather-app",
+  "main": "worker/index.ts",
+  "compatibility_date": "2026-08-08",
+  "assets": {
+    "directory": "./dist",
+    "binding": "ASSETS",
+    "not_found_handling": "single-page-application",
+    "run_worker_first": ["/api/*"]
+  },
+  "ratelimits": [
+    {
+      "name": "ROUTE_RATE_LIMITER",
+      "namespace_id": "19004",
+      "simple": { "limit": 30, "period": 60 }
+    },
+    {
+      "name": "WEATHER_RATE_LIMITER",
+      "namespace_id": "19005",
+      "simple": { "limit": 60, "period": 60 }
+    }
+  ],
+  "observability": {
+    "enabled": true
+  }
+}
